@@ -1,0 +1,19 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// +--------------------------------------------------------------------------------------------+ //
+// Quick Version
+//
+// Holds a static string representing the current version of CakePHP
+//
+// Quick(tm) : Rapid Development Framework
+// Copyright (c) Will Studio, Inc.
+//
+// Licensed under The MIT License
+// Redistributions of files must retain the above copyright notice.
+//
+// @copyright     Copyright (c) Will Studio, Inc.
+// @link          http://www.***.org
+// @since         Quick(tm) v 0.1.0
+// @license       http://www.opensource.org/licenses/mit-license.php MIT License
+// +--------------------------------------------------------------------------------------------+ //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+0.1.0
