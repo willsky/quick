@@ -15,7 +15,7 @@ defined('ERROR_SYSTEM_CORE') || define('ERROR_SYSTEM_CORE', 500);
 class Server {
     public static function run($func = NULL) {
         if (!defined('APP_RUN')) {
-            self::autoload();
+            // self::autoload();
             Core\Config::load(CONF_PATH . DS . 'bootstrap.php');
 
             if (is_callable($func)) {
@@ -30,40 +30,40 @@ class Server {
         }
     }
 
-    public static function autoload($func = NULL) {
-        if (!defined('AUTOLOAD')) {
-            if ( is_null($func) ) {
-                spl_autoload_register(array(get_called_class(), 'auto'));
-            } else {
-                spl_autoload_register($func);
-            }
+    // public static function autoload($func = NULL) {
+    //     if (!defined('AUTOLOAD')) {
+    //         if ( is_null($func) ) {
+    //             spl_autoload_register(array(get_called_class(), 'auto'));
+    //         } else {
+    //             spl_autoload_register($func);
+    //         }
 
-            define('AUTOLOAD', TRUE);
-        }
-    }
+    //         define('AUTOLOAD', TRUE);
+    //     }
+    // }
 
     private static function formatClassPath($className){
         $className = ltrim($className, '\\');
         return strtolower(strtr($className, '\\', DIRECTORY_SEPARATOR)) . '.php';
     }
 
-    private static function auto($className) {
-        if ( !class_exists($className, FALSE) && !interface_exists($className, FALSE) ) {
-            $classFile = self::formatClassPath($className);
-            $libPrefix = explode(DIRECTORY_SEPARATOR, $classFile);
+    // private static function auto($className) {
+    //     if ( !class_exists($className, FALSE) && !interface_exists($className, FALSE) ) {
+    //         $classFile = self::formatClassPath($className);
+    //         $libPrefix = explode(DIRECTORY_SEPARATOR, $classFile);
 
-            switch(strtoupper($libPrefix[0])) {
-                case 'CONTROLLERS':
-                case 'MODELS':
-                case 'PLUGIN':
-                    require(implode(DIRECTORY_SEPARATOR, array(APP_PATH, $classFile)));
-                    break;
-                default:
-                    require(implode(DIRECTORY_SEPARATOR, array(LIB_PATH, $classFile)));
-            }
+    //         switch(strtoupper($libPrefix[0])) {
+    //             case 'CONTROLLERS':
+    //             case 'MODELS':
+    //             case 'PLUGIN':
+    //                 require(implode(DIRECTORY_SEPARATOR, array(APP_PATH, $classFile)));
+    //                 break;
+    //             default:
+    //                 require(implode(DIRECTORY_SEPARATOR, array(LIB_PATH, $classFile)));
+    //         }
             
-        }
-    }
+    //     }
+    // }
 
     public static function errorHandler($func = NULL) {
         if (!defined('ERROR_HANDLER')) {

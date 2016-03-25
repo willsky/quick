@@ -44,7 +44,7 @@ final class Router
             self::matchDefault($uri);
         }
 
-        $className = '\\Controllers\\'.self::$controller;
+        $className = '\\App\\Controllers\\'.self::$controller;
         $controllerObject =  new $className();
 
         if (!method_exists($controllerObject, self::$action)) {
