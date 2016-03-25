@@ -1,15 +1,15 @@
 {
-	"name": "willsky/quick",
+    "name": "willsky/quick",
     "description": "The Quick framework",
     "type": "library",
     "keywords": ["framework", "php", "quick"],
     "license": "MIT",
-	"autoload":  {
-		"psr-4": {
-			"Quick\\": "src/"
-		}
-	},
-	"require": {
-        "php": ">=5.4.16"
+    "autoload":  {
+        "psr-4": {
+            "Quick\\": "src/"
+            }
+        },
+        "require": {
+            "php": ">=5.4.16"
+        }
     }
-}
