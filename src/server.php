@@ -1,11 +1,13 @@
 <?php
 namespace Quick;
 
-defined('FRAME_PATH') || define('FRAME_PATH', dirname(__DIR__));
-defined('LIB_PATH') || define('LIB_PATH', FRAME_PATH);
-defined('APP_PATH') || define('APP_PATH', dirname(LIB_PATH) . DIRECTORY_SEPARATOR . 'app');
-defined('CONF_PATH') || define('CONF_PATH', APP_PATH . DIRECTORY_SEPARATOR . 'conf');
 defined('DS') || define('DS', DIRECTORY_SEPARATOR);
+// defined('FRAME_PATH') || define('FRAME_PATH', dirname(__DIR__));
+// defined('LIB_PATH') || define('LIB_PATH', FRAME_PATH);
+defined('APP_PATH') || define('APP_PATH', dirname(dirname(dirname(__DIR__))) . DS . 'app');
+defined('CONF_PATH') || define('CONF_PATH', APP_PATH . DS . 'conf');
+defined('APP_NAMESPACE') || define('APP_NAMESPACE', '\\App');
+defined('VIEW_PATH') || define('VIEW_PATH', APP_PATH . DS . 'views');
 
 // 错误码相关
 defined('ERROR_SYSTEM_CORE_MAX') || define('ERROR_SYSTEM_CORE_MAX', 1000);
@@ -42,10 +44,10 @@ class Server {
     //     }
     // }
 
-    private static function formatClassPath($className){
-        $className = ltrim($className, '\\');
-        return strtolower(strtr($className, '\\', DIRECTORY_SEPARATOR)) . '.php';
-    }
+    // private static function formatClassPath($className){
+    //     $className = ltrim($className, '\\');
+    //     return strtolower(strtr($className, '\\', DIRECTORY_SEPARATOR)) . '.php';
+    // }
 
     // private static function auto($className) {
     //     if ( !class_exists($className, FALSE) && !interface_exists($className, FALSE) ) {

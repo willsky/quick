@@ -167,7 +167,7 @@ abstract class Factory
             return self::$_models[$name];
         }
 
-        $class = '\\Models\\' . $name;
+        $class = APP_NAMESPACE . '\\Models\\' . $name;
         $ref = new \Reflectionclass($class);
         $args = array_slice(func_get_args(), 1);
         self::$_models[$name] = $args ? $ref->newinstanceargs($args) : new $class();

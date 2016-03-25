@@ -11,15 +11,13 @@ class Html extends Factory
         if (is_null($tpl)) {
             require(implode(DIRECTORY_SEPARATOR, 
                 array(
-                    APP_PATH, 
-                    'views', 
+                    VIEW_PATH, 
                     strtolower(\Quick\Core\Router::$controller), 
                     strtolower(\Quick\Core\Router::$action) . '.php')));
         } else {
             require(implode(DIRECTORY_SEPARATOR, 
                 array(
-                    APP_PATH, 
-                    'views', 
+                    VIEW_PATH, 
                     $tpl.'.php')));
         }
         $this->isRender = TRUE;
