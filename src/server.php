@@ -17,7 +17,6 @@ defined('ERROR_SYSTEM_CORE') || define('ERROR_SYSTEM_CORE', 500);
 class Server {
     public static function run($func = NULL) {
         if (!defined('APP_RUN')) {
-            // self::autoload();
             Core\Config::load(CONF_PATH . DS . 'bootstrap.php');
 
             if (is_callable($func)) {
@@ -31,41 +30,6 @@ class Server {
             define('APP_RUN', TRUE);
         }
     }
-
-    // public static function autoload($func = NULL) {
-    //     if (!defined('AUTOLOAD')) {
-    //         if ( is_null($func) ) {
-    //             spl_autoload_register(array(get_called_class(), 'auto'));
-    //         } else {
-    //             spl_autoload_register($func);
-    //         }
-
-    //         define('AUTOLOAD', TRUE);
-    //     }
-    // }
-
-    // private static function formatClassPath($className){
-    //     $className = ltrim($className, '\\');
-    //     return strtolower(strtr($className, '\\', DIRECTORY_SEPARATOR)) . '.php';
-    // }
-
-    // private static function auto($className) {
-    //     if ( !class_exists($className, FALSE) && !interface_exists($className, FALSE) ) {
-    //         $classFile = self::formatClassPath($className);
-    //         $libPrefix = explode(DIRECTORY_SEPARATOR, $classFile);
-
-    //         switch(strtoupper($libPrefix[0])) {
-    //             case 'CONTROLLERS':
-    //             case 'MODELS':
-    //             case 'PLUGIN':
-    //                 require(implode(DIRECTORY_SEPARATOR, array(APP_PATH, $classFile)));
-    //                 break;
-    //             default:
-    //                 require(implode(DIRECTORY_SEPARATOR, array(LIB_PATH, $classFile)));
-    //         }
-            
-    //     }
-    // }
 
     public static function errorHandler($func = NULL) {
         if (!defined('ERROR_HANDLER')) {
@@ -132,8 +96,15 @@ class Server {
             app_shutdown();
         }
 
-        if (($error = error_get_last()) && in_array($error['type'], array(E_ERROR, E_PARSE, E_CORE_ERROR,E_COMPILE_ERROR))) {
-            throw new \Exception(sprintf('Fatal error: %s', $error['message']), ERROR_SYSTEM_CORE);
+        if (($error = error_get_last()) && in_array($error['type'], array(E_ERROR, E_PARSE, E_CORE_ERROR,E_COMPILE_ERROR, E_CORE_WARNING, E_COMPILE_WARNING))) {
+            $errorFile = $error['file'];
+            $code = ERROR_SYSTEM_CORE;
+            $message = $error['message'];
+            $errorLine = $error['line'];
+            $trace = [];
+            Core\Logger::error("Core", sprintf('error_file: %s; error_line: %s; code: %s ; msg: %s', $errorFile, $errorLine, $code, $message));
+            require_once(__DIR__ . DS . 'view'. DS .'error.php');
+            exit;
         }
     }
 }
