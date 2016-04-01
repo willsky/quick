@@ -39,6 +39,11 @@ final class App extends Singleton
     }
 
     public function run() {
+        // 添加router的配置处理
+        if ($routerRules = $this->get('routers')) {
+            Router::set($routerRules);
+        }
+        
         Router::run();
     }
 

@@ -89,13 +89,13 @@ final class Router
     }
 
     private static function match($action) {
+        // 路由规则里不允许传入参数到action, 暂时没有做路由匹配
         if ($action) {
             $pattern = explode(':', $action);
             self::$controller = $pattern[0];
 
             if (count($pattern) > 1) {
                 self::$action = $pattern[1];
-                self::$_params = array_slice($pattern, 2);
             }
         }
     }
