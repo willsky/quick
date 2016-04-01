@@ -17,7 +17,7 @@ final class Router
             }
         } else {
             $path = strtolower($path);
-            $map[$path] = $action;
+            self::$map[$path] = $action;
         }
     }
 
